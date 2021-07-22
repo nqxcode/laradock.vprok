@@ -2,6 +2,9 @@ FROM nginx:alpine
 
 LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
 
+ENV TZ=Europe/Moscow
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 COPY nginx.conf /etc/nginx/
 
 # If you're in China, or you need to change sources, will be set CHANGE_SOURCE to true in .env.

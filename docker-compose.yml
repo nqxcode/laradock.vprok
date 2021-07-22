@@ -179,6 +179,15 @@ services:
         - ./php-worker/supervisord.d:/etc/supervisord.d
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
+        - "perekrestok.fo.local:${DOCKER_HOST_IP}"
+        - "perekrestok.bo.local:${DOCKER_HOST_IP}"
+        - "perekrestok.wms.local:${DOCKER_HOST_IP}"
+        - "vpr-satis.im.perekrestok.ru:172.20.31.11"
+        - "std-base01.services.lab.x5.ru:172.20.40.171"
+        - "std-base02.services.lab.x5.ru:172.20.40.172"
+        - "satis.shared.dev.lab.x5.ru:172.20.31.11"
+        - "dev67.services.lab.x5.ru:172.20.41.67"
+        - "art.x5.ru:192.168.32.215"
       ports:
         - "${WORKSPACE_SSH_PORT}:22"
         - "${WORKSPACE_BROWSERSYNC_HOST_PORT}:3000"
@@ -281,6 +290,7 @@ services:
           - http_proxy
           - https_proxy
           - no_proxy
+          - TZ=${WORKSPACE_TIMEZONE}
       volumes:
         - ./php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
@@ -291,6 +301,9 @@ services:
         - "9000"
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
+        - "std-base01.services.lab.x5.ru:172.20.40.171"
+        - "std-base02.services.lab.x5.ru:172.20.40.172"
+        - "dev67.services.lab.x5.ru:172.20.41.67"
       environment:
         - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
         - DOCKER_HOST=tcp://docker-in-docker:2376
@@ -1905,7 +1918,7 @@ services:
       build:
         context: ./manticore
       volumes:
-        - ${MANTICORE_CONFIG_PATH}:/etc/sphinxsearch
+        - ${MANTICORE_CONFIG_PATH}:/etc/manticoresearch
         - ${DATA_PATH_HOST}/manticore/data:/var/lib/manticore/data
         - ${DATA_PATH_HOST}/manticore/log:/var/log/manticore
       ports:
@@ -1914,6 +1927,8 @@ services:
         - "${MANTICORE_HTTP_PORT}:9308"
       networks:
         - backend
+      extra_hosts:
+        - "std-base01.services.lab.x5.ru:172.20.40.171"
 
 ### SONARQUBE ################################################
     sonarqube:
