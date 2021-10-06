@@ -179,9 +179,9 @@ services:
         - ./php-worker/supervisord.d:/etc/supervisord.d
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
-        - "perekrestok.fo.local:${DOCKER_HOST_IP}"
-        - "perekrestok.bo.local:${DOCKER_HOST_IP}"
-        - "perekrestok.wms.local:${DOCKER_HOST_IP}"
+        - "perekrestok.fo.local:172.17.0.1"
+        - "perekrestok.bo.local:172.17.0.1"
+        - "perekrestok.wms.local:172.17.0.1"
         - "vpr-satis.im.perekrestok.ru:172.20.31.11"
         - "std-base01.services.lab.x5.ru:172.20.40.171"
         - "std-base02.services.lab.x5.ru:172.20.40.172"
