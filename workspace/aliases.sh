@@ -51,6 +51,7 @@ alias cll="clear && ls -l"
 alias cls="clear && ls"
 alias code="cd /var/www"
 alias ea="vi ~/aliases.sh"
+alias clear-all="set -x ; rm -rf components ; rm -rf vendor ; rm bootstrap/cache/* ; composer clear ; rm -rf ../webpack_cache/cache-loader/ ; set +x"
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
