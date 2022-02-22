@@ -255,6 +255,8 @@ RUN set -eux; \
     ###########################################################################
     # GMP (GNU Multiple Precision):
     ###########################################################################
+    apt-get update -yqq && \
+    pecl channel-update pecl.php.net && \
     if [ ${INSTALL_GMP} = true ]; then \
       # Install the PHP GMP extension
       apt-get -yqq install php${LARADOCK_PHP_VERSION}-gmp; \
