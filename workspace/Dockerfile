@@ -356,7 +356,7 @@ RUN if [ ${INSTALL_XDEBUG} = true ]; then \
       fi \
     fi \
   fi && \
-  echo "zend_extension=xdebug.so" >> /etc/php/${LARADOCK_PHP_VERSION}/cli/conf.d/20-xdebug.ini \
+  echo -e "zend_extension=xdebug.so\nxdebug.mode=\"debug\"" >> /etc/php/${LARADOCK_PHP_VERSION}/cli/conf.d/20-xdebug.ini \
 ;fi
 
 # ADD for REMOTE debugging
