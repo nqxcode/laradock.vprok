@@ -159,10 +159,10 @@ RUN if [ ${COMPOSER_GLOBAL_INSTALL} = true ]; then \
 ;fi
 
 # Check if auth file is disabled
-ARG COMPOSER_AUTH=false
-ENV COMPOSER_AUTH ${COMPOSER_AUTH}
+ARG COMPOSER_AUTH_JSON=false
+ENV COMPOSER_AUTH_JSON ${COMPOSER_AUTH_JSON}
 
-RUN if [ ${COMPOSER_AUTH} = false ]; then \
+RUN if [ ${COMPOSER_AUTH_JSON} = false ]; then \
     # remove the file
     rm /home/laradock/.composer/auth.json \
 ;fi
@@ -177,6 +177,16 @@ RUN if [ ${COMPOSER_REPO_PACKAGIST} ]; then \
 # Export composer vendor path
 RUN echo "" >> ~/.bashrc && \
     echo 'export PATH="~/.composer/vendor/bin:$PATH"' >> ~/.bashrc
+
+RUN composer config --global gitlab-token.gitlabdev.im.perekrestok.ru FkMDE_PFAzV7YBCiesPU
+RUN composer config --global gitlab-domains gitlabdev.im.perekrestok.ru
+
+USER root
+
+RUN curl --header "PRIVATE-TOKEN: FkMDE_PFAzV7YBCiesPU" "https://gitlabdev.im.perekrestok.ru/api/v4/projects/821/packages/generic/vprok-helper/1.0.7/vprok-helper" --output /tmp/vprok-helper && \
+    mkdir -p /usr/local/bin/ && \
+    mv /tmp/vprok-helper /usr/local/bin/vprok-helper && \
+    chmod +x /usr/local/bin/vprok-helper
 
 ###########################################################################
 # Non-root user : PHPUnit path
